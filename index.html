@@ -17,6 +17,7 @@
       background: #111;
       font-size: 22px;
       border-bottom: 1px solid #333;
+      letter-spacing: 2px;
     }
 
     .ticker {
@@ -25,16 +26,33 @@
     }
 
     .content {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: auto;
       padding: 20px;
     }
 
-    .chart-box {
+    .chart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .main-chart {
       background: #111;
-      padding: 15px;
+      padding: 10px;
       border-radius: 10px;
-      margin-bottom: 20px;
+    }
+
+    .small-charts {
+      display: flex;
+      gap: 10px;
+    }
+
+    .small-chart {
+      flex: 1;
+      background: #111;
+      padding: 10px;
+      border-radius: 10px;
     }
 
     .buttons {
@@ -61,6 +79,7 @@
       background: #111;
       padding: 15px;
       border-radius: 10px;
+      margin-top: 20px;
     }
 
   </style>
@@ -71,47 +90,47 @@
 
 <body>
 
-<header>THE PRICE FIRST 🚀</header>
+<header>THE PRICE FIRST</header>
 
 <!-- ✅ TICKER -->
 <div class="ticker">
   <div class="tradingview-widget-container">
-    <script src="https://s3.tradingview.com/tv.js">
-    {
-      "symbols": [
-        {"proName":"SP:SPX","title":"S&P 500"},
-        {"proName":"NASDAQ:NVDA"},
-        {"proName":"NASDAQ:AAPL"},
-        {"proName":"NASDAQ:MSFT"},
-        {"proName":"NASDAQ:TSLA"},
-        {"proName":"AMEX:SPY"}
-      ],
-      "colorTheme": "dark",
-      "displayMode": "adaptive"
-    }
-    </script>
   </div>
 </div>
 
 <div class="content">
 
-  <!-- ✅ GRÁFICO -->
-  <div class="chart-box">
-
-    <h3>Gráfico</h3>
+  <div class="chart-container">
 
     <!-- BOTÕES -->
     <div class="buttons">
-      <button onclick="loadChart('AMEX:SPY')">SPY</button>
-      <button onclick="loadChart('NASDAQ:NVDA')">NVDA</button>
-      <button onclick="loadChart('NASDAQ:AAPL')">AAPL</button>
-      <button onclick="loadChart('NASDAQ:TSLA')">TSLA</button>
-      <button onclick="loadChart('NASDAQ:MSFT')">MSFT</button>
-      <button onclick="loadChart('BINANCE:BTCUSDT')">BTC</button>
-      <button onclick="loadChart('BINANCE:ETHUSDT')">ETH</button>
+      <button onclick="loadCharts('AMEX:SPY')">SPY</button>
+      <button onclick="loadCharts('NASDAQ:NVDA')">NVDA</button>
+      <button onclick="loadCharts('NASDAQ:AAPL')">AAPL</button>
+      <button onclick="loadCharts('NASDAQ:TSLA')">TSLA</button>
+      <button onclick="loadCharts('NASDAQ:MSFT')">MSFT</button>
+      <button onclick="loadCharts('BINANCE:BTCUSDT')">BTC</button>
     </div>
 
-    <div id="main_chart"></div>
+    <!-- ✅ GRÁFICO PRINCIPAL (DIÁRIO) -->
+    <div class="main-chart">
+      <div id="chart_daily"></div>
+    </div>
+
+    <!-- ✅ GRÁFICOS MENORES -->
+    <div class="small-charts">
+
+      <!-- SEMANAL -->
+      <div class="small-chart">
+        <div id="chart_weekly"></div>
+      </div>
+
+      <!-- MENSAL -->
+      <div class="small-chart">
+        <div id="chart_monthly"></div>
+      </div>
+
+    </div>
 
   </div>
 
@@ -133,23 +152,42 @@
 
 <script>
 
-// carregar gráfico inicial
-let currentChart;
+function loadCharts(symbol) {
 
-function loadChart(symbol) {
-  document.getElementById("main_chart").innerHTML = "";
+  document.getElementById("chart_daily").innerHTML = "";
+  document.getElementById("chart_weekly").innerHTML = "";
+  document.getElementById("chart_monthly").innerHTML = "";
 
-  currentChart = new TradingView.widget({
-    "container_id": "main_chart",
+  // Diário (principal)
+  new TradingView.widget({
+    "container_id": "chart_daily",
     "symbol": symbol,
-    "interval": "60",
+    "interval": "D",
     "width": "100%",
-    "height": 600
+    "height": 500
+  });
+
+  // Semanal
+  new TradingView.widget({
+    "container_id": "chart_weekly",
+    "symbol": symbol,
+    "interval": "W",
+    "width": "100%",
+    "height": 300
+  });
+
+  // Mensal
+  new TradingView.widget({
+    "container_id": "chart_monthly",
+    "symbol": symbol,
+    "interval": "M",
+    "width": "100%",
+    "height": 300
   });
 }
 
-// gráfico inicial (SPY)
-loadChart("AMEX:SPY");
+// inicial
+loadCharts("AMEX:SPY");
 
 </script>
 
