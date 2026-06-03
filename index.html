@@ -24,58 +24,49 @@
       padding: 5px;
     }
 
-    .container {
-      display: grid;
-      grid-template-columns: 200px 1fr 300px;
-      grid-template-rows: auto auto;
-      gap: 10px;
-      padding: 10px;
+    .main {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 20px;
     }
 
-    .sidebar, .chart, .calendar, .heatmap {
+    .chart-box {
+      width: 800px;
       background: #111;
-      border-radius: 8px;
       padding: 10px;
+      border-radius: 10px;
+    }
+
+    .side-box {
+      width: 300px;
+      background: #111;
+      padding: 10px;
+      border-radius: 10px;
     }
 
     .calendar {
-      grid-column: 1 / span 3;
+      max-width: 1100px;
+      margin: 20px auto;
+      background: #111;
+      padding: 10px;
+      border-radius: 10px;
     }
 
-    .heatmap {
-      grid-column: 1 / span 3;
-    }
-
-    button {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 5px;
-      background: #222;
-      border: none;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #444;
-    }
   </style>
 
-  <!-- TradingView script -->
   <script src="https://s3.tradingview.com/tv.js"></script>
 
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>THE PRICE FIRST 🚀</header>
 
-<!-- ✅ TICKER (ATIVOS PASSANDO NO TOPO) -->
+<!-- ✅ TICKER -->
 <div class="ticker">
   <div class="tradingview-widget-container">
-    <div id="ticker_tape"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
+    <script src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
     {
       "symbols": [
         {"proName":"SP:SPX","title":"S&P 500"},
@@ -83,11 +74,8 @@
         {"proName":"NASDAQ:AAPL"},
         {"proName":"NASDAQ:MSFT"},
         {"proName":"NASDAQ:TSLA"},
-        {"proName":"AMEX:SPY"},
-        {"proName":"BINANCE:BTCUSDT"},
-        {"proName":"BINANCE:ETHUSDT"}
+        {"proName":"AMEX:SPY"}
       ],
-      "showSymbolLogo": true,
       "colorTheme": "dark",
       "isTransparent": false,
       "displayMode": "adaptive"
@@ -96,110 +84,71 @@
   </div>
 </div>
 
-<div class="container">
+<!-- ✅ CONTEÚDO CENTRAL -->
+<div class="main">
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <h3>Ativos</h3>
-
-    <button onclick="loadChart('AMEX:SPY')">SPY</button>
-    <button onclick="loadChart('NASDAQ:NVDA')">NVDA</button>
-    <button onclick="loadChart('NASDAQ:TSLA')">TSLA</button>
-    <button onclick="loadChart('NASDAQ:AAPL')">AAPL</button>
-    <button onclick="loadChart('NASDAQ:MSFT')">MSFT</button>
-    <button onclick="loadChart('BINANCE:BTCUSDT')">BTC</button>
-    <button onclick="loadChart('BINANCE:ETHUSDT')">ETH</button>
-  </div>
-
-  <!-- GRÁFICO PRINCIPAL -->
-  <div class="chart">
+  <!-- GRÁFICO -->
+  <div class="chart-box">
+    <h3>Gráfico</h3>
     <div id="main_chart"></div>
   </div>
 
-  <!-- GRÁFICO SECUNDÁRIO -->
-  <div class="chart">
-    <div id="second_chart"></div>
-  </div>
-
-  <!-- ✅ HEATMAP S&P500 -->
-  <div class="heatmap">
-    <h3>Heatmap S&P 500</h3>
+  <!-- ✅ LISTA TREASURIES -->
+  <div class="side-box">
+    <h3>US Treasuries</h3>
 
     <div class="tradingview-widget-container">
-      <div id="heatmap_widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js">
+      <script src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js">
       {
-        "dataSource": "SPX500",
-        "grouping": "sector",
-        "blockSize": "market_cap_basic",
-        "blockColor": "change",
-        "locale": "en",
-        "symbolUrl": "",
         "colorTheme": "dark",
-        "hasTopBar": true,
-        "isDataSetEnabled": true,
-        "isZoomEnabled": true,
-        "hasSymbolTooltip": true,
+        "dateRange": "1D",
+        "showChart": false,
+        "locale": "en",
         "width": "100%",
-        "height": "500"
+        "height": "400",
+        "tabs": [
+          {
+            "title": "Bonds",
+            "symbols": [
+              {"s":"TVC:US02Y","d":"2Y"},
+              {"s":"TVC:US05Y","d":"5Y"},
+              {"s":"TVC:US10Y","d":"10Y"},
+              {"s":"TVC:US30Y","d":"30Y"}
+            ]
+          }
+        ]
       }
       </script>
     </div>
 
-  </div>
-
-  <!-- CALENDÁRIO -->
-  <div class="calendar">
-    <h3>Calendário Econômico</h3>
-
-    <div class="tradingview-widget-container">
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js">
-      {
-        "width": "100%",
-        "height": "500",
-        "importanceFilter": "-1,0,1"
-      }
-      </script>
-    </div>
   </div>
 
 </div>
 
+<!-- ✅ CALENDÁRIO -->
+<div class="calendar">
+  <h3>Calendário Econômico</h3>
+
+  <div class="tradingview-widget-container">
+    <script src="https://s3.tradingview.com/external-embedding/embed-widget-events.js">
+    {
+      "width": "100%",
+      "height": "450"
+    }
+    </script>
+  </div>
+</div>
+
 <script>
 
-let mainChart;
-let secondChart;
-
 // gráfico principal
-mainChart = new TradingView.widget({
+new TradingView.widget({
   "container_id": "main_chart",
   "symbol": "AMEX:SPY",
   "interval": "60",
   "width": "100%",
   "height": 500
 });
-
-// gráfico secundário
-secondChart = new TradingView.widget({
-  "container_id": "second_chart",
-  "symbol": "BINANCE:BTCUSDT",
-  "interval": "60",
-  "width": "100%",
-  "height": 500
-});
-
-// troca ativo
-function loadChart(symbol) {
-  document.getElementById("main_chart").innerHTML = "";
-
-  new TradingView.widget({
-    "container_id": "main_chart",
-    "symbol": symbol,
-    "interval": "60",
-    "width": "100%",
-    "height": 500
-  });
-}
 
 </script>
 
