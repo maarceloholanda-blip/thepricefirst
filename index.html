@@ -15,9 +15,10 @@ body{
     height:100%;
     background:#000;
     overflow:hidden;
-    font-family:Arial, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
+/* TOPO */
 header{
     height:60px;
     display:flex;
@@ -27,18 +28,29 @@ header{
     color:#fff;
     font-size:22px;
     font-weight:700;
-    letter-spacing:6px;
-    border-bottom:1px solid #111;
+    letter-spacing:8px;
+    border-bottom:1px solid #222;
+    text-transform:uppercase;
 }
 
+/* GRÁFICO */
 #tradingview_chart{
     width:100%;
-    height:65vh;
+    height:72vh;
 }
 
+/* DIVISÓRIA */
+.divider{
+    width:100%;
+    height:2px;
+    background:#fff;
+    box-shadow:0 0 10px rgba(255,255,255,.8);
+}
+
+/* CALENDÁRIO */
 #economic-calendar{
     width:100%;
-    height:calc(35vh - 60px);
+    height:20vh;
     background:#000;
     overflow:hidden;
 }
@@ -47,10 +59,13 @@ header{
     width:100%;
     height:100%;
     border:none;
+    background:#000;
 }
 
-.poweredBy{
-    display:none;
+/* Remove barras extras */
+::-webkit-scrollbar{
+    width:0;
+    height:0;
 }
 </style>
 
@@ -62,6 +77,8 @@ header{
 <header>PRICE FIRST</header>
 
 <div id="tradingview_chart"></div>
+
+<div class="divider"></div>
 
 <div id="economic-calendar">
     <iframe
@@ -75,23 +92,39 @@ header{
 <script>
 new TradingView.widget({
     container_id: "tradingview_chart",
+
     autosize: true,
+
     symbol: "NASDAQ:AAPL",
+
     interval: "D",
+
     timezone: "Etc/UTC",
+
     theme: "dark",
+
     style: "1",
+
     locale: "pt",
 
     backgroundColor: "#000000",
 
+    toolbar_bg: "#000000",
+
     allow_symbol_change: false,
+
     hide_top_toolbar: true,
+
     hide_legend: true,
+
     withdateranges: false,
+
     details: false,
+
     hotlist: false,
+
     calendar: false,
+
     studies: []
 });
 </script>
