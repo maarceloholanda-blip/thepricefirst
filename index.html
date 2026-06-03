@@ -6,24 +6,177 @@
   <style>
     body {
       margin: 0;
-      font-family: Inter;
-      background-color: #0d0d0d;
-      color: white;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: black;
     }
 
     header {
       text-align: center;
       padding: 15px;
-      font-size: 20px;
-      letter-spacing: 2px;
+      font-size: 18px;
+      letter-spacing: 3px;
+      background: white;
+      border-bottom: 1px solid #ddd;
     }
+
+    .ticker {
+      background: white;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .container {
+      max-width: 1600px;
+      width: 95%;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 8px 14px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background: #eee;
+    }
+
+    .main-chart {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .small-charts {
+      display: flex;
+      gap: 15px;
+    }
+
+    .small-chart {
+      flex: 1;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
   </style>
+
+  <script src="https://s3.tradingview.com/tv.js"></script>
 
 </head>
 
 <body>
 
 <header>THE PRICE FIRST</header>
+
+<!-- ✅ TICKER CORRETO -->
+<div class="ticker">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
+    {
+      "symbols": [
+        {"proName":"SP:SPX","title":"S&P 500"},
+        {"proName":"NASDAQ:NVDA"},
+        {"proName":"NASDAQ:AAPL"},
+        {"proName":"NASDAQ:MSFT"},
+        {"proName":"NASDAQ:TSLA"},
+        {"proName":"AMEX:SPY"},
+        {"proName":"BINANCE:BTCUSDT"},
+        {"proName":"BINANCE:ETHUSDT"}
+      ],
+      "colorTheme": "light",
+      "isTransparent": true,
+      "displayMode": "adaptive"
+    }
+    </script>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- BOTÕES -->
+  <div class="buttons">
+    <button onclick="loadCharts('AMEX:SPY')">SPY</button>
+    <button onclick="loadCharts('NASDAQ:NVDA')">NVDA</button>
+    <button onclick="loadCharts('NASDAQ:AAPL')">AAPL</button>
+    <button onclick="loadCharts('NASDAQ:MSFT')">MSFT</button>
+    <button onclick="loadCharts('NASDAQ:TSLA')">TSLA</button>
+    <button onclick="loadCharts('BINANCE:BTCUSDT')">BTC</button>
+  </div>
+
+  <!-- ✅ GRÁFICO PRINCIPAL -->
+  <div class="main-chart">
+    <div id="chart_daily"></div>
+  </div>
+
+  <!-- ✅ GRÁFICOS MENORES -->
+  <div class="small-charts">
+
+    <div class="small-chart">
+      <div id="chart_weekly"></div>
+    </div>
+
+    <div class="small-chart">
+      <div id="chart_monthly"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+function loadCharts(symbol) {
+
+  document.getElementById("chart_daily").innerHTML = "";
+  document.getElementById("chart_weekly").innerHTML = "";
+  document.getElementById("chart_monthly").innerHTML = "";
+
+  // ✅ DIÁRIO
+  new TradingView.widget({
+    container_id: "chart_daily",
+    symbol: symbol,
+    interval: "D",
+    width: "100%",
+    height: 650
+  });
+
+  // ✅ SEMANAL
+  new TradingView.widget({
+    container_id: "chart_weekly",
+    symbol: symbol,
+    interval: "W",
+    width: "100%",
+    height: 300
+  });
+
+  // ✅ MENSAL
+  new TradingView.widget({
+    container_id: "chart_monthly",
+    symbol: symbol,
+    interval: "M",
+    width: "100%",
+    height: 300
+  });
+}
+
+// inicial
+loadCharts("AMEX:SPY");
+
+</script>
 
 </body>
 </html>
