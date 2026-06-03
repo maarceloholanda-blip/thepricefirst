@@ -12,9 +12,20 @@ html, body{
     padding:0;
     width:100%;
     height:100%;
-    background:#000;
     font-family:Arial, sans-serif;
     overflow:hidden;
+    transition:0.3s;
+}
+
+/* TEMAS */
+body.dark{
+    background:#000;
+    color:#fff;
+}
+
+body.light{
+    background:#f5f5f5;
+    color:#000;
 }
 
 /* HEADER */
@@ -23,15 +34,25 @@ header{
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#fff;
     font-size:22px;
     font-weight:700;
     letter-spacing:8px;
     border-bottom:1px solid #222;
-    text-transform:uppercase;
+    position:relative;
 }
 
-/* LAYOUT */
+/* BOTÃO TEMA */
+button{
+    position:absolute;
+    right:15px;
+    padding:8px 12px;
+    cursor:pointer;
+    border:none;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+/* CONTAINER */
 .container{
     width:100%;
     height:calc(100vh - 60px);
@@ -39,18 +60,17 @@ header{
     flex-direction:column;
 }
 
-/* TOPO CRIPTO */
+/* TOPO */
 .top{
     height:25%;
     width:100%;
-    background:#000;
 }
 
-/* LINHA DE SEPARAÇÃO */
+/* SEPARAÇÃO */
 .separator{
     height:2px;
     width:100%;
-    background:#ffffff;
+    background:#fff;
     box-shadow:0 0 10px rgba(255,255,255,0.6);
 }
 
@@ -60,45 +80,67 @@ header{
     width:100%;
 }
 
-/* IFAME PADRÃO */
 iframe{
     width:100%;
     height:100%;
     border:none;
 }
-
-/* powered by oculto */
-.poweredBy{
-    display:none;
-}
 </style>
 
 </head>
 
-<body>
+<body class="dark">
 
-<header>PRICE FIRST</header>
+<header>
+    PRICE FIRST
+
+    <button onclick="toggleTheme()">Tema</button>
+</header>
 
 <div class="container">
 
-    <!-- 🔥 CRIPTO (DARK THEME) -->
+    <!-- CRIPTO -->
     <div class="top">
-        <iframe
-            src="https://www.widgets.investing.com/crypto-currency-rates?theme=darkTheme&pairs=945629,997650,1001803,1010773,1010776">
-        </iframe>
+        <iframe id="cryptoFrame"></iframe>
     </div>
 
-    <!-- LINHA DE SEPARAÇÃO -->
     <div class="separator"></div>
 
-    <!-- 📊 CALENDÁRIO (DARK MODE) -->
+    <!-- CALENDÁRIO -->
     <div class="bottom">
-        <iframe
-            src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1&darkTheme=1">
-        </iframe>
+        <iframe id="calendarFrame"></iframe>
     </div>
 
 </div>
+
+<script>
+let isDark = true;
+
+function loadWidgets(){
+    const crypto = document.getElementById("cryptoFrame");
+    const calendar = document.getElementById("calendarFrame");
+
+    if(isDark){
+        crypto.src = "https://www.widgets.investing.com/crypto-currency-rates?theme=darkTheme&pairs=945629,997650,1001803,1010773,1010776";
+
+        calendar.src = "https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1&darkTheme=1";
+    } else {
+        crypto.src = "https://www.widgets.investing.com/crypto-currency-rates?theme=lightTheme&pairs=945629,997650,1001803,1010773,1010776";
+
+        calendar.src = "https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1";
+    }
+}
+
+function toggleTheme(){
+    isDark = !isDark;
+
+    document.body.className = isDark ? "dark" : "light";
+
+    loadWidgets();
+}
+
+loadWidgets();
+</script>
 
 </body>
 </html>
