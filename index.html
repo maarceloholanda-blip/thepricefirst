@@ -17,7 +17,6 @@ html, body{
     transition:0.3s;
 }
 
-/* TEMAS */
 body.dark{
     background:#000;
     color:#fff;
@@ -41,18 +40,18 @@ header{
     position:relative;
 }
 
-/* BOTÃO TEMA */
+/* BOTÃO */
 button{
     position:absolute;
     right:15px;
     padding:8px 12px;
-    cursor:pointer;
     border:none;
-    border-radius:5px;
+    cursor:pointer;
+    border-radius:6px;
     font-weight:bold;
 }
 
-/* CONTAINER */
+/* LAYOUT */
 .container{
     width:100%;
     height:calc(100vh - 60px);
@@ -63,7 +62,6 @@ button{
 /* TOPO */
 .top{
     height:25%;
-    width:100%;
 }
 
 /* SEPARAÇÃO */
@@ -77,7 +75,6 @@ button{
 /* CALENDÁRIO */
 .bottom{
     height:75%;
-    width:100%;
 }
 
 iframe{
@@ -93,52 +90,55 @@ iframe{
 
 <header>
     PRICE FIRST
-
     <button onclick="toggleTheme()">Tema</button>
 </header>
 
 <div class="container">
 
-    <!-- CRIPTO -->
     <div class="top">
-        <iframe id="cryptoFrame"></iframe>
+        <iframe id="crypto"></iframe>
     </div>
 
     <div class="separator"></div>
 
-    <!-- CALENDÁRIO -->
     <div class="bottom">
-        <iframe id="calendarFrame"></iframe>
+        <iframe id="calendar"></iframe>
     </div>
 
 </div>
 
 <script>
-let isDark = true;
+let dark = true;
 
 function loadWidgets(){
-    const crypto = document.getElementById("cryptoFrame");
-    const calendar = document.getElementById("calendarFrame");
+    const crypto = document.getElementById("crypto");
+    const calendar = document.getElementById("calendar");
 
-    if(isDark){
-        crypto.src = "https://www.widgets.investing.com/crypto-currency-rates?theme=darkTheme&pairs=945629,997650,1001803,1010773,1010776";
+    if(dark){
+        // 🌙 DARK MODE
+        crypto.src =
+        "https://www.widgets.investing.com/crypto-currency-rates?theme=darkTheme&pairs=945629,997650,1001803,1010773,1010776";
 
-        calendar.src = "https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1&darkTheme=1";
+        calendar.src =
+        "https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1&darkTheme=1";
+
     } else {
-        crypto.src = "https://www.widgets.investing.com/crypto-currency-rates?theme=lightTheme&pairs=945629,997650,1001803,1010773,1010776";
+        // ☀️ LIGHT MODE
+        crypto.src =
+        "https://www.widgets.investing.com/crypto-currency-rates?theme=lightTheme&pairs=945629,997650,1001803,1010773,1010776";
 
-        calendar.src = "https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1";
+        calendar.src =
+        "https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1";
     }
 }
 
 function toggleTheme(){
-    isDark = !isDark;
-
-    document.body.className = isDark ? "dark" : "light";
-
+    dark = !dark;
+    document.body.className = dark ? "dark" : "light";
     loadWidgets();
 }
 
+// inicializa
 loadWidgets();
 </script>
 
