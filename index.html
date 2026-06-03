@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>THE PRICE FIRST</title>
+<title>PRICE FIRST</title>
 
 <style>
 html,
@@ -15,25 +15,42 @@ body{
     height:100%;
     background:#000;
     overflow:hidden;
-    font-family:Arial,sans-serif;
+    font-family:Arial, sans-serif;
 }
 
 header{
-    height:50px;
+    height:60px;
     display:flex;
     align-items:center;
     justify-content:center;
     background:#000;
     color:#fff;
-    font-size:18px;
-    font-weight:bold;
-    letter-spacing:4px;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:6px;
     border-bottom:1px solid #111;
 }
 
 #tradingview_chart{
     width:100%;
-    height:calc(100vh - 50px);
+    height:65vh;
+}
+
+#economic-calendar{
+    width:100%;
+    height:calc(35vh - 60px);
+    background:#000;
+    overflow:hidden;
+}
+
+#economic-calendar iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+.poweredBy{
+    display:none;
 }
 </style>
 
@@ -42,9 +59,18 @@ header{
 
 <body>
 
-<header>THE PRICE FIRST</header>
+<header>PRICE FIRST</header>
 
 <div id="tradingview_chart"></div>
+
+<div id="economic-calendar">
+    <iframe
+        src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1"
+        allowtransparency="true"
+        marginwidth="0"
+        marginheight="0">
+    </iframe>
+</div>
 
 <script>
 new TradingView.widget({
