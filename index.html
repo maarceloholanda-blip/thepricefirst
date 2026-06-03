@@ -6,9 +6,9 @@
   <style>
     body {
       margin: 0;
-      background-color: white;
+      background-color: #000000;
       font-family: Arial, sans-serif;
-      color: black;
+      color: white;
     }
 
     header {
@@ -16,12 +16,23 @@
       padding: 20px;
       font-size: 18px;
       letter-spacing: 3px;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #333;
+      background-color: #000000;
+      color: white;
     }
 
     .container {
-      max-width: 800px;
-      margin: 30px auto;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .tradingview-widget-container {
+      width: 100%;
+    }
+
+    #indices {
+      width: 100%;
     }
   </style>
 
@@ -33,7 +44,6 @@
 
 <div class="container">
 
-  <!-- ✅ LISTA DE INDICES (igual Investing) -->
   <div class="tradingview-widget-container">
     <div id="indices"></div>
   </div>
@@ -47,9 +57,9 @@
 new TradingView.widget({
   container_id: "indices",
   width: "100%",
-  height: 400,
+  height: 500,
   locale: "en",
-  colorTheme: "light",
+  colorTheme: "dark",
   symbols: [
     ["S&P 500","SP:SPX"],
     ["Dow Jones","DJ:DJI"],
