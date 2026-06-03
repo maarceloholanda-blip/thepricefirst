@@ -8,6 +8,7 @@
       margin: 0;
       background-color: white;
       font-family: Arial, sans-serif;
+      color: black;
     }
 
     header {
@@ -15,6 +16,12 @@
       padding: 20px;
       font-size: 18px;
       letter-spacing: 3px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
     }
   </style>
 
@@ -23,6 +30,36 @@
 <body>
 
 <header>THE PRICE FIRST</header>
+
+<div class="container">
+
+  <!-- ✅ LISTA DE INDICES (igual Investing) -->
+  <div class="tradingview-widget-container">
+    <div id="indices"></div>
+  </div>
+
+</div>
+
+<!-- Script TradingView -->
+<script src="https://s3.tradingview.com/tv.js"></script>
+
+<script>
+new TradingView.widget({
+  container_id: "indices",
+  width: "100%",
+  height: 400,
+  locale: "en",
+  colorTheme: "light",
+  symbols: [
+    ["S&P 500","SP:SPX"],
+    ["Dow Jones","DJ:DJI"],
+    ["Nasdaq","NASDAQ:NDX"],
+    ["Russell 2000","RUSSELL:RUT"],
+    ["VIX","CBOE:VIX"],
+    ["US 10Y","TVC:US10Y"]
+  ]
+});
+</script>
 
 </body>
 </html>
