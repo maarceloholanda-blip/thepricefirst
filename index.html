@@ -13,78 +13,78 @@
 
     header {
       text-align: center;
-      padding: 10px;
+      padding: 12px;
       background: #111;
-      font-size: 22px;
+      font-size: 20px;
       border-bottom: 1px solid #333;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
     }
 
+    /* ✅ TICKER */
     .ticker {
-      background: black;
-      padding: 5px;
+      background: #000;
     }
 
+    /* ✅ CONTAINER PRINCIPAL */
     .content {
-      max-width: 1600px;
+      max-width: 1700px;
+      width: 95%;
       margin: auto;
-      padding: 30px;
+      padding: 20px;
     }
 
-    .chart-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    /* ✅ GRÁFICO GRANDE */
     .main-chart {
       background: #111;
-      padding: 10px;
-      border-radius: 10px;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 15px;
     }
 
+    /* ✅ GRÁFICOS MENORES */
     .small-charts {
       display: flex;
-      gap: 10px;
+      gap: 15px;
+      margin-bottom: 20px;
     }
 
     .small-chart {
       flex: 1;
       background: #111;
-      padding: 10px;
-      border-radius: 10px;
+      padding: 15px;
+      border-radius: 12px;
     }
 
+    /* ✅ BOTÕES */
     .buttons {
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
     }
 
     button {
-      padding: 8px 12px;
+      padding: 8px 14px;
       background: #222;
       border: none;
       color: white;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 6px;
+      font-size: 12px;
     }
 
     button:hover {
       background: #444;
     }
 
+    /* ✅ CALENDÁRIO */
     .calendar {
       background: #111;
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
     }
 
   </style>
-
-  <script src="https://s3.tradingview.com/tv.js"></script>
 
 </head>
 
@@ -92,44 +92,40 @@
 
 <header>THE PRICE FIRST</header>
 
-<!-- ✅ TICKER -->
+<!-- ✅ TICKER REAL -->
 <div class="ticker">
-  <div class="tradingview-widget-container">
-  </div>
+  <iframe 
+    src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_ticker&symbol=SPX&interval=1D&hidesidetoolbar=1"
+    style="width:100%; height:50px; border:none;">
+  </iframe>
 </div>
 
 <div class="content">
 
-  <div class="chart-container">
+  <!-- BOTÕES -->
+  <div class="buttons">
+    <button onclick="loadCharts('AMEX:SPY')">SPY</button>
+    <button onclick="loadCharts('NASDAQ:NVDA')">NVDA</button>
+    <button onclick="loadCharts('NASDAQ:AAPL')">AAPL</button>
+    <button onclick="loadCharts('NASDAQ:MSFT')">MSFT</button>
+    <button onclick="loadCharts('NASDAQ:TSLA')">TSLA</button>
+    <button onclick="loadCharts('BINANCE:BTCUSDT')">BTC</button>
+  </div>
 
-    <!-- BOTÕES -->
-    <div class="buttons">
-      <button onclick="loadCharts('AMEX:SPY')">SPY</button>
-      <button onclick="loadCharts('NASDAQ:NVDA')">NVDA</button>
-      <button onclick="loadCharts('NASDAQ:AAPL')">AAPL</button>
-      <button onclick="loadCharts('NASDAQ:TSLA')">TSLA</button>
-      <button onclick="loadCharts('NASDAQ:MSFT')">MSFT</button>
-      <button onclick="loadCharts('BINANCE:BTCUSDT')">BTC</button>
+  <!-- ✅ GRÁFICO PRINCIPAL (DIÁRIO) -->
+  <div class="main-chart">
+    <div id="chart_daily"></div>
+  </div>
+
+  <!-- ✅ GRÁFICOS SECUNDÁRIOS -->
+  <div class="small-charts">
+
+    <div class="small-chart">
+      <div id="chart_weekly"></div>
     </div>
 
-    <!-- ✅ GRÁFICO PRINCIPAL (DIÁRIO) -->
-    <div class="main-chart">
-      <div id="chart_daily"></div>
-    </div>
-
-    <!-- ✅ GRÁFICOS MENORES -->
-    <div class="small-charts">
-
-      <!-- SEMANAL -->
-      <div class="small-chart">
-        <div id="chart_weekly"></div>
-      </div>
-
-      <!-- MENSAL -->
-      <div class="small-chart">
-        <div id="chart_monthly"></div>
-      </div>
-
+    <div class="small-chart">
+      <div id="chart_monthly"></div>
     </div>
 
   </div>
@@ -138,17 +134,14 @@
   <div class="calendar">
     <h3>Calendário Econômico</h3>
 
-    <div class="tradingview-widget-container">
-      <script src="https://s3.tradingview.com/external-embedding/embed-widget-events.js">
-      {
-        "width": "100%",
-        "height": "500"
-      }
-      </script>
-    </div>
+    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=calendar"
+      style="width:100%; height:500px; border:none;">
+    </iframe>
   </div>
 
 </div>
+
+<script src="https://s3.tradingview.com/tv.js"></script>
 
 <script>
 
@@ -158,31 +151,31 @@ function loadCharts(symbol) {
   document.getElementById("chart_weekly").innerHTML = "";
   document.getElementById("chart_monthly").innerHTML = "";
 
-  // Diário (principal)
+  // ✅ DIÁRIO (principal)
   new TradingView.widget({
     "container_id": "chart_daily",
     "symbol": symbol,
     "interval": "D",
     "width": "100%",
-    "height": 500
+    "height": 700
   });
 
-  // Semanal
+  // ✅ SEMANAL
   new TradingView.widget({
     "container_id": "chart_weekly",
     "symbol": symbol,
     "interval": "W",
     "width": "100%",
-    "height": 300
+    "height": 350
   });
 
-  // Mensal
+  // ✅ MENSAL
   new TradingView.widget({
     "container_id": "chart_monthly",
     "symbol": symbol,
     "interval": "M",
     "width": "100%",
-    "height": 300
+    "height": 350
   });
 }
 
