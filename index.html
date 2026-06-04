@@ -7,140 +7,29 @@
 <title>PRICE FIRST</title>
 
 <style>
-html, body{
-    margin:0;
-    padding:0;
-    width:100%;
-    height:100%;
-    font-family:Arial, sans-serif;
-    overflow:hidden;
-    transition:0.3s;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #000; /* fundo preto profissional */
 }
 
-body.dark{
-    background:#000;
-    color:#fff;
-}
-
-body.light{
-    background:#f5f5f5;
-    color:#000;
-}
-
-/* HEADER */
-header{
-    height:60px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    font-weight:700;
-    letter-spacing:8px;
-    border-bottom:1px solid #222;
-    position:relative;
-}
-
-/* BOTÃO */
-button{
-    position:absolute;
-    right:15px;
-    padding:8px 12px;
-    border:none;
-    cursor:pointer;
-    border-radius:6px;
-    font-weight:bold;
-}
-
-/* LAYOUT */
-.container{
-    width:100%;
-    height:calc(100vh - 60px);
-    display:flex;
-    flex-direction:column;
-}
-
-/* TOPO */
-.top{
-    height:25%;
-}
-
-/* SEPARAÇÃO */
-.separator{
-    height:2px;
-    width:100%;
-    background:#fff;
-    box-shadow:0 0 10px rgba(255,255,255,0.6);
-}
-
-/* CALENDÁRIO */
-.bottom{
-    height:75%;
-}
-
-iframe{
-    width:100%;
-    height:100%;
-    border:none;
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 </style>
 
 </head>
 
-<body class="dark">
+<body>
 
-<header>
-    PRICE FIRST
-    <button onclick="toggleTheme()">Tema</button>
-</header>
-
-<div class="container">
-
-    <div class="top">
-        <iframe id="crypto"></iframe>
-    </div>
-
-    <div class="separator"></div>
-
-    <div class="bottom">
-        <iframe id="calendar"></iframe>
-    </div>
-
-</div>
-
-<script>
-let dark = true;
-
-function loadWidgets(){
-    const crypto = document.getElementById("crypto");
-    const calendar = document.getElementById("calendar");
-
-    if(dark){
-        // 🌙 DARK MODE
-        crypto.src =
-        "https://www.widgets.investing.com/crypto-currency-rates?theme=darkTheme&pairs=945629,997650,1001803,1010773,1010776";
-
-        calendar.src =
-        "https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1&darkTheme=1";
-
-    } else {
-        // ☀️ LIGHT MODE
-        crypto.src =
-        "https://www.widgets.investing.com/crypto-currency-rates?theme=lightTheme&pairs=945629,997650,1001803,1010773,1010776";
-
-        calendar.src =
-        "https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=8&lang=1";
-    }
-}
-
-function toggleTheme(){
-    dark = !dark;
-    document.body.className = dark ? "dark" : "light";
-    loadWidgets();
-}
-
-// inicializa
-loadWidgets();
-</script>
+<iframe 
+src="https://volcorehq-my.sharepoint.com/personal/contato_volcoregroup_com/_layouts/15/Doc.aspx?sourcedoc={56c881d8-ec85-4a4c-88a2-966428eea310}&action=embedview&wdHideHeaders=True&wdHideGridlines=True&wdDownloadButton=False">
+</iframe>
 
 </body>
 </html>
+``
