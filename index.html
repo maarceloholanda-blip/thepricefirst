@@ -17,17 +17,17 @@ html, body {
     align-items: center;
 }
 
+/* container central */
 .container {
     width: 80%;
     height: 80%;
-    overflow: hidden;
 }
 
-/* vídeo */
-video {
+/* iframe */
+iframe {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* deixa bonito tipo cinema */
+    border: none;
 }
 </style>
 
@@ -36,11 +36,9 @@ video {
 <body>
 
 <div class="container">
-
-    <video autoplay muted loop playsinline>
-        <source src="video.mp4" type="video/mp4">
-    </video>
-
+    <iframe 
+    src="https://volcorehq-my.sharepoint.com/personal/contato_volcoregroup_com/_layouts/15/Doc.aspx?sourcedoc={56c881d8-ec85-4a4c-88a2-966428eea310}&action=embedview&wdAllowInteractivity=False&Item=Chart%202&wdInConfigurator=True">
+    </iframe>
 </div>
 
 </body>
