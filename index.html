@@ -10,11 +10,23 @@
 html, body {
     margin: 0;
     padding: 0;
-    width: 100%;
     height: 100%;
-    background: #000; /* fundo preto profissional */
+    background: #000;
+    display: flex;
+    justify-content: center; /* centraliza */
+    align-items: center;     /* centraliza */
 }
 
+/* container do gráfico */
+.container {
+    width: 80%;
+    height: 80%;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1); /* leve glow */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* iframe */
 iframe {
     width: 100%;
     height: 100%;
@@ -26,10 +38,11 @@ iframe {
 
 <body>
 
-<iframe 
-src="https://volcorehq-my.sharepoint.com/personal/contato_volcoregroup_com/_layouts/15/Doc.aspx?sourcedoc={56c881d8-ec85-4a4c-88a2-966428eea310}&action=embedview&wdHideHeaders=True&wdHideGridlines=True&wdDownloadButton=False">
-</iframe>
+<div class="container">
+    <iframe 
+    src="https://volcorehq-my.sharepoint.com/personal/contato_volcoregroup_com">
+    </iframe>
+</div>
 
 </body>
 </html>
-``
