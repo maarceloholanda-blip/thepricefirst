@@ -10,16 +10,24 @@
 
   <meta
     name="description"
-    content="Volcore Market Intelligence Dashboard"
+    content="PRICE FIRST Market Intelligence Dashboard"
   >
 
-  <title>PRICE FIRST | Volcore Market Intelligence</title>
+  <title>PRICE FIRST | Market Intelligence</title>
 
   <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     html,
     body {
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       margin: 0;
       padding: 0;
       background: #000000;
@@ -46,7 +54,6 @@
       background: #000000;
       color: #ffffff;
       border-bottom: 1px solid #242424;
-      box-sizing: border-box;
     }
 
     .dashboard-brand {
@@ -69,6 +76,7 @@
       font-size: 13px;
       font-weight: 700;
       text-decoration: none;
+      white-space: nowrap;
       transition:
         background-color 160ms ease,
         color 160ms ease;
@@ -95,12 +103,29 @@
       background: #ffffff;
     }
 
+    .dashboard-loading {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .dashboard-frame {
+      position: relative;
+      z-index: 1;
+    }
+
     .dashboard-fallback {
       display: none;
       width: 100%;
       min-height: 500px;
       padding: 40px 24px;
-      box-sizing: border-box;
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -109,6 +134,7 @@
     }
 
     .dashboard-fallback-content {
+      width: 100%;
       max-width: 620px;
     }
 
@@ -137,77 +163,3 @@
       font-size: 15px;
       font-weight: 800;
       text-decoration: none;
-    }
-
-    .dashboard-fallback-button:hover {
-      background: #ffffff;
-      color: #0540f2;
-    }
-
-    @media (max-width: 700px) {
-      .dashboard-header {
-        min-height: 58px;
-        padding: 0 14px;
-      }
-
-      .dashboard-brand {
-        font-size: 13px;
-      }
-
-      .dashboard-link {
-        min-height: 34px;
-        padding: 0 13px;
-        font-size: 11px;
-      }
-
-      .dashboard-container {
-        height: calc(100vh - 59px);
-        min-height: 600px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <main class="dashboard-page">
-    <header class="dashboard-header">
-      <div class="dashboard-brand">
-        PRICE FIRST | Market Intelligence
-      </div>
-
-      https://SEU-DASHBOARD.vercel.app
-        Abrir em nova aba
-      </a>
-    </header>
-
-    <section class="dashboard-container">
-      https://SEU-DASHBOARD.vercel.app</iframe>
-    </section>
-
-    <section id="dashboardFallback" class="dashboard-fallback">
-      <div class="dashboard-fallback-content">
-        <h1>Volcore Market Intelligence</h1>
-
-        <p>
-          O dashboard não pôde ser exibido dentro desta página.
-          Use o botão abaixo para abrir o painel diretamente.
-        </p>
-
-        https://SEU-DASHBOARD.vercel.app
-          Acessar Dashboard
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const dashboardFrame = document.getElementById('dashboardFrame');
-    const dashboardFallback = document.getElementById('dashboardFallback');
-
-    dashboardFrame.addEventListener('error', function () {
-      dashboardFrame.style.display = 'none';
-      dashboardFallback.style.display = 'flex';
-    });
-  </script>
-</body>
-</html>
