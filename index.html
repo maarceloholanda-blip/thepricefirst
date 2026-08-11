@@ -1,24 +1,213 @@
-node_modules
-.next
-out
-build
-dist
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
 
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-google-service-account.json
-*service-account*.json
+  <meta
+    name="description"
+    content="Volcore Market Intelligence Dashboard"
+  >
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+  <title>PRICE FIRST | Volcore Market Intelligence</title>
 
-.DS_Store
-Thumbs.db
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #000000;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-*.tsbuildinfo
+    body {
+      min-height: 100vh;
+    }
+
+    .dashboard-page {
+      width: 100%;
+      min-height: 100vh;
+      background: #000000;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 64px;
+      padding: 0 24px;
+      background: #000000;
+      color: #ffffff;
+      border-bottom: 1px solid #242424;
+      box-sizing: border-box;
+    }
+
+    .dashboard-brand {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .dashboard-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 18px;
+      border: 1px solid #ffffff;
+      border-radius: 999px;
+      background: transparent;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition:
+        background-color 160ms ease,
+        color 160ms ease;
+    }
+
+    .dashboard-link:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .dashboard-container {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 65px);
+      min-height: 700px;
+      background: #ffffff;
+    }
+
+    .dashboard-frame {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #ffffff;
+    }
+
+    .dashboard-fallback {
+      display: none;
+      width: 100%;
+      min-height: 500px;
+      padding: 40px 24px;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .dashboard-fallback-content {
+      max-width: 620px;
+    }
+
+    .dashboard-fallback h1 {
+      margin: 0 0 14px;
+      font-size: 28px;
+    }
+
+    .dashboard-fallback p {
+      margin: 0 0 24px;
+      color: #bdbdbd;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .dashboard-fallback-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 24px;
+      border: 1px solid #0540f2;
+      border-radius: 999px;
+      background: #0540f2;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .dashboard-fallback-button:hover {
+      background: #ffffff;
+      color: #0540f2;
+    }
+
+    @media (max-width: 700px) {
+      .dashboard-header {
+        min-height: 58px;
+        padding: 0 14px;
+      }
+
+      .dashboard-brand {
+        font-size: 13px;
+      }
+
+      .dashboard-link {
+        min-height: 34px;
+        padding: 0 13px;
+        font-size: 11px;
+      }
+
+      .dashboard-container {
+        height: calc(100vh - 59px);
+        min-height: 600px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="dashboard-page">
+    <header class="dashboard-header">
+      <div class="dashboard-brand">
+        PRICE FIRST | Market Intelligence
+      </div>
+
+      https://SEU-DASHBOARD.vercel.app
+        Abrir em nova aba
+      </a>
+    </header>
+
+    <section class="dashboard-container">
+      https://SEU-DASHBOARD.vercel.app</iframe>
+    </section>
+
+    <section id="dashboardFallback" class="dashboard-fallback">
+      <div class="dashboard-fallback-content">
+        <h1>Volcore Market Intelligence</h1>
+
+        <p>
+          O dashboard não pôde ser exibido dentro desta página.
+          Use o botão abaixo para abrir o painel diretamente.
+        </p>
+
+        https://SEU-DASHBOARD.vercel.app
+          Acessar Dashboard
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const dashboardFrame = document.getElementById('dashboardFrame');
+    const dashboardFallback = document.getElementById('dashboardFallback');
+
+    dashboardFrame.addEventListener('error', function () {
+      dashboardFrame.style.display = 'none';
+      dashboardFallback.style.display = 'flex';
+    });
+  </script>
+</body>
+</html>
